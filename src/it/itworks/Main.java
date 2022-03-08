@@ -1,11 +1,5 @@
 package it.itworks;
 
-import it.itworks.model.Antenna;
-import it.itworks.model.Asset;
-import it.itworks.model.Building;
-import it.itworks.model.Element;
-import it.itworks.model.Grid;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +54,8 @@ public class Main {
                     int score = 0;
                 }
             }
+
+            return -1;
         }
     }
 
