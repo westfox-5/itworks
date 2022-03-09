@@ -4,10 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Path;
 
 public class CustomReader {
-    private String path;
-    private char lineSeparator;
+    private final String path;
+    private final char lineSeparator;
     private boolean lastNewLine;
 
     private boolean init;
@@ -16,6 +17,9 @@ public class CustomReader {
     private final int bufferSize = 10;
     private int pos;
     private int nPos;
+
+    private String filename;
+    private int row, begin_col, end_col;
 
     public CustomReader(String path, char lineSeparator) {
         this.path = path;
@@ -31,6 +35,11 @@ public class CustomReader {
             buffer = new char[bufferSize];
             pos = 0;
             nPos = 0;
+
+            filename = Path.of(path).getFileName().toString();
+            row = 0;
+            begin_col = 0;
+            end_col = 0;
 
             init = true;
         }
@@ -62,7 +71,7 @@ public class CustomReader {
         return buffer[pos];
     }
 
-    public String getNextToken() throws IOException {
+    public String getNextTokenStr() throws IOException {
         init();
 
         this.lastNewLine = false;
@@ -71,13 +80,19 @@ public class CustomReader {
         Character data;
         boolean lineFeed = false;
 
+        begin_col = end_col + 1;
         while ( (data = getNextChar()) != null ) {
+            end_col++;
             if ( data == '\n' ) {
                 this.lastNewLine = true;
+                end_col = 0;
+                row++;
                 break;
             } else if ( data == '\r' ) {
                 lineFeed = true;
                 this.lastNewLine = true;
+                end_col=0;
+                row++;
                 break;
             } else if ( data == lineSeparator ) {
                 break;
@@ -94,18 +109,38 @@ public class CustomReader {
         if ( lineFeed ) {
             data = peekNextChar();
             if ( data == '\n' ) {
-                getNextChar(); // consumo '\r'
+                getNextChar(); // consumo '\r's
             }
         }
 
         return sb.toString();
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> Token<T> getNextToken(Class<T> clazz) throws IOException {
+        String nextValue = getNextTokenStr();
+        Location loc = Location.of(filename, row, begin_col);
+
+        if (clazz == Double.class) {
+            return (Token<T>) Token.ofDouble(loc, Double.parseDouble(nextValue));
+        }
+
+        if (clazz == Integer.class) {
+            return (Token<T>) Token.ofInteger(loc, Integer.parseInt(nextValue));
+        }
+
+        if (clazz == String.class) {
+            return (Token<T>) Token.ofString(loc, nextValue);
+        }
+
+        throw new RuntimeException("Could not cast token to " + clazz.getName() + " type.");
+    }
+
     public void close() {
         if ( reader != null ) {
             try {
                 reader.close();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
         }
     }
