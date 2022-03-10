@@ -66,11 +66,14 @@ public class GameReader extends InputReader<Game> {
 
                     assert (demon.getNumberOfFragments() != null);
 
-                    for (int i = 0; i < demon.getNumberOfFragments(); ++i) {
-                        Fragment fragment = parseBasicClass(Fragment.class, reader);
-                        list.add(fragment);
+                    if ( demon.getNumberOfFragments() == 0) {
+                        reader.getNextTokenStr(); // consumo lo spazio
+                    } else {
+                        for (int i = 0; i < demon.getNumberOfFragments(); ++i) {
+                            Fragment fragment = parseBasicClass(Fragment.class, reader);
+                            list.add(fragment);
+                        }
                     }
-
                     set(demon, inField, list);
                 }
             } else {

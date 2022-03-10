@@ -14,7 +14,7 @@ public class CustomReader {
     private boolean init;
     private Reader reader;
     private char[] buffer;
-    private final int bufferSize = 10;
+    private final int bufferSize = 8192;
     private int pos;
     private int nPos;
 
@@ -67,8 +67,22 @@ public class CustomReader {
         return pos < nPos;
     }
 
-    private char peekNextChar() {
-        return buffer[pos];
+    private Character peekNextChar() throws IOException {
+        if ( pos >= nPos ) {
+            pos = 0;
+            nPos = 0;
+
+            int r = reader.read(buffer, 0, bufferSize);
+            if ( r >= 0 ) {
+                nPos = r;
+            }
+        }
+
+        if ( hasNext() ) {
+            return buffer[pos];
+        }
+        // return buffer[pos];
+        return null;
     }
 
     public String getNextTokenStr() throws IOException {
@@ -108,7 +122,7 @@ public class CustomReader {
 
         if ( lineFeed ) {
             data = peekNextChar();
-            if ( data == '\n' ) {
+            if ( data != null && data == '\n' ) {
                 getNextChar(); // consumo '\r's
             }
         }

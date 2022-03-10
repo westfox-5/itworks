@@ -5,59 +5,41 @@ import it.itworks.models.Fragment;
 import it.itworks.models.Game;
 import it.itworks.reader.GameReader;
 import it.itworks.reader.InputReader;
+import it.itworks.solution.*;
+import it.itworks.writer.GameWriter;
+import it.itworks.writer.OutputWriter;
 
 public class Main {
     public static void main(String[] args) {
-        String filename = "00-example.txt";
-        String inDir = "tests/";
-        String outDir = "outputs/";
-
-        System.out.println("Reading input file '"+inDir+filename+"'...");
-        Game game = read(inDir+filename);
+        Game game = read(args[0]);
         if (game == null) {
             throw new RuntimeException("Failed to parse input file.");
         }
-        System.out.println("Success!");
 
-        /*
-        System.out.println("-------------------------");
-        System.out.println("stamina: "+ game.getStamina());
-        System.out.println("maxStamina: "+ game.getMaxStamina());
-        System.out.println("maxTurns: "+ game.getMaxTurns());
+        new Solution4(1.0, 0.9, 1.2, 1.2).solve(game);
 
-        System.out.println("numDemons: "+ game.getNumDemons());
-        System.out.println("Demons: ");
-        for (Demon d: game.getDemons()) {
-            System.out.print(d.getId() + ":: " +d.getStaminaForKill() + " " + d.getTurnToRecoverStamina() + " " + d.getStaminaRecovered() + " " + d.getNumberOfFragments() + " ");
-            for (Fragment f: d.getFragmentsForTurn()) {
-                System.out.print(f.getFragment() + " ");
-            }
-            System.out.println();
-        }
-        */
-
-
+        write(game, args[1]);
     }
 
-    private static Game read(String filepath) {
-        try {
-            InputReader<Game> reader = new GameReader();
+private static Game read(String filepath) {
+try {
+    InputReader<Game> reader = new GameReader();
             return reader.parseFile(filepath);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-/*
-    private static boolean write(Matrix matrix, String filepath) {
+
+
+    private static boolean write(Game game, String filepath) {
         try {
-            OutputWriter<Matrix> writer = new MatrixWriter();
-            return writer.writeToFile(matrix, filepath);
+            OutputWriter<Game> writer = new GameWriter();
+            return writer.writeToFile(game, filepath);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-    */
 }
 

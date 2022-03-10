@@ -6,28 +6,23 @@ import it.itworks.models.Demon;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Solution1 implements Solution {
-    public void solve(Game game) {
-        int tMax = game.getMaxTurns();
+public class Solution1 extends Solution {
 
+    public Demon getNextDemon(Game game, int tMaxCurrent) {
+        TreeSet<Demon> treeSet = new TreeSet<>(
+                Comparator.comparingDouble(Demon::getCurrentMaxScore).reversed()
+        );
 
-        //LinkedHashMap preserve the ordering of elements in which they are inserted
-        // LinkedHashMap<String, Integer> reverseSortedMap = new LinkedHashMap<>();
+        for ( Demon demon : game.getKillableDemons()) {
+            int maxScore = maxScore(demon, tMaxCurrent);
+            demon.setCurrentMaxScore(maxScore);
 
-
-
-        // reverseSortedMap.get
-
-        Map<Integer, Integer> staminaToReturn = new HashMap<>();
-
-        for ( int i = 0; i < tMax; i++ ) {
-            int tMaxCurrent = tMax - i;
-            LinkedHashMap<Demon, Integer> demonScore = getCurrentMaxScore(game, tMaxCurrent);
-
+            treeSet.add(demon);
         }
-    }
 
-    private LinkedHashMap<Demon, Integer> getCurrentMaxScore(Game game, int tMaxCurrent) {
+        return treeSet.isEmpty() ? null: treeSet.iterator().next();
+
+
         /*List<Demon> demons = game.getDemons();
         Map<Demon, Integer> mapMaxScore = new HashMap<>();
         for ( Demon demon : demons ) {
@@ -49,7 +44,7 @@ public class Solution1 implements Solution {
 
     private int maxScore(Demon d, int tMax) {
         int score = 0;
-        int n = Math.max(d.getNumberOfFragments(), tMax);
+        int n = Math.min(d.getNumberOfFragments(), tMax);
         for ( int i = 0; i < n; i++ ) {
             int fragment = d.getFragmentsForTurn().get(i).getFragment();
             score += fragment;

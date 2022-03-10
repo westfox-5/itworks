@@ -16,4 +16,10 @@ public class Fragment {
     public void setFragment(Integer fragment) {
         this.fragment = fragment;
     }
+
+    public Fragment clone() {
+        Fragment f = new Fragment();
+        f.fragment = fragment;
+        return f;
+    }
 }

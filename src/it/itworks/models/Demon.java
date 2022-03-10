@@ -1,15 +1,17 @@
 package it.itworks.models;
 
-import it.itworks.annotations.Input;
-import it.itworks.annotations.InputClass;
-import it.itworks.annotations.InputCollection;
+import it.itworks.annotations.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @InputClass
+@OutputClass
 public class Demon {
-    private static Integer count;
-    private final Integer id;
+    public static int count = 0;
+
+    @Output(position = 1, newLine = true)
+    private Integer id; // TODO set final
 
     @Input(position = 1, max = 100_000)
     private Integer staminaForKill;
@@ -28,9 +30,11 @@ public class Demon {
     private List<Fragment> fragmentsForTurn;
 
     private int turnDefeat;
+    private double currentMaxScore;
 
     public Demon() {
         this.id = count++;
+        this.turnDefeat = -1;
     }
 
     public Integer getId() {
@@ -78,10 +82,34 @@ public class Demon {
     }
 
     public void setTurnDefeat(int turnDefeat) {
-        turnDefeat = turnDefeat;
+        this.turnDefeat = turnDefeat;
     }
 
     public int getTurnDefeat() {
         return turnDefeat;
+    }
+
+    public double getCurrentMaxScore() {
+        return currentMaxScore;
+    }
+
+    public void setCurrentMaxScore(double currentMaxScore) {
+        this.currentMaxScore = currentMaxScore;
+    }
+
+    public Demon clone() {
+        Demon d = new Demon();
+        d.id = id;
+        d.staminaForKill = staminaForKill;
+        d.turnToRecoverStamina = turnToRecoverStamina;
+        d.staminaRecovered = staminaRecovered;
+        d.numberOfFragments = numberOfFragments;
+
+        d.fragmentsForTurn = new ArrayList<>();
+        for (Fragment f: getFragmentsForTurn()) {
+            d.fragmentsForTurn.add(f);
+        }
+
+        return d;
     }
 }
