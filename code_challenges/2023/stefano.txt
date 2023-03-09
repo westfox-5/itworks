@@ -1,0 +1,21 @@
+        int maxSum = Integer.MIN_VALUE;
+        int[] maxPath = new int[pathLength];
+        
+        for (int i = 0; i < matrix.length - pathLength + 1; i++) {
+            for (int j = 0; j < matrix[0].length - pathLength + 1; j++) {
+                int currentSum = 0;
+                int[] currentPath = new int[pathLength];
+                
+                for (int k = 0; k < pathLength; k++) {
+                    currentSum += matrix[i+k][j+k];
+                    currentPath[k] = (i+k) * matrix[0].length + (j+k);
+                }
+                
+                if (currentSum > maxSum) {
+                    maxSum = currentSum;
+                    maxPath = currentPath;
+                }
+            }
+        }
+        
+        return maxPath;
