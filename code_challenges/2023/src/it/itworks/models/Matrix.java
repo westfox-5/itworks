@@ -89,7 +89,11 @@ public class Matrix {
 	}
 
 	public void placeSnake(Snake snake, Cell cell) {
-		
+
+	}
+
+	public Cell getCella(int x, int y) {
+		return this.celle[x][y];
 	}
 
 }
