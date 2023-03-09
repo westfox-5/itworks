@@ -52,4 +52,14 @@ public class Cell {
 	public void setValue(Integer value) {
 		this.value = value;
 	}	
+	
+	
+	public Cell clone() {
+		Cell c = new Cell(r, c);
+		c.wh = wh;
+		c.empty = empty;
+		c.value = value;
+		
+		return c;
+	}
 }

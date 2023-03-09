@@ -1,5 +1,6 @@
 package it.itworks.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.itworks.annotations.Input;
@@ -99,7 +100,14 @@ public class Snake {
 	public Snake clone() {
 		Snake s = new Snake();
 		s.length = length;
+		s.ci = ci;
+		s.ri = ri;
+		s.currentCell = currentCell.clone();
 		
+		s.path = new ArrayList<Cell>();
+		for (Cell c: path) {
+			s.path.add(c.clone());
+		}
 		return s;
 	}
 
