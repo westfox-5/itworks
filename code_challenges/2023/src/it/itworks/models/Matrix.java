@@ -180,32 +180,6 @@ public class Matrix {
 		return Arrays.asList(a,b,c,d).stream().mapToInt(p->p==null?0:p).max().getAsInt();
 	}
 
-//	private void calcolaBestPath(Integer length, Cell cell, Integer value) {
-//	        int maxSum = Integer.MIN_VALUE;
-//            ArrayList<Cell> maxPath = new ArrayList<Cell>();
-//
-//	        for (int i = 0; i < R - length + 1; i++) {
-//	            for (int j = 0; j < C - length + 1; j++) {
-//	                int currentSum = 0;
-//	                ArrayList<Cell> currentPath = new ArrayList<Cell>();
-//	                
-//	                for (int k = 0; k < length; k++) {
-//	                    Cell cella = getCella(i+k,j+k);
-//	                    if (!cella.isWormhole())
-//	                    	currentSum += value; 
-//	                    currentPath.add(index, cella) (i+k) * matrix[0].length + (j+k);
-//	                }
-//	                
-//	                if (currentSum > maxSum) {
-//	                    maxSum = currentSum;
-//	                    maxPath = currentPath;
-//	                }
-//	            }
-//	        }
-//	        
-//	        return maxPath;
-//		}
-
 	public int getSafeX(int x) {
 		int safeX = (x + getR()) % getR();
 		return safeX;
