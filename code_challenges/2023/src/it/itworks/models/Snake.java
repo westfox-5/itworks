@@ -32,39 +32,45 @@ public class Snake {
 		currentCell=new Cell(matrix, ri, ci);
 	}
 	
-	public Cell goRight() {
-		return moveTo("R");
+	public Cell goRight(boolean noWh) {
+		return moveTo("R", noWh);
 	}
 
-	public Cell goLeft() {
-		return moveTo("L");
+	public Cell goLeft(boolean noWh) {
+		return moveTo("L", noWh);
 	}
 
-	public Cell goUp() {
-		return moveTo("U");
+	public Cell goUp(boolean noWh) {
+		return moveTo("U", noWh);
 	}
 
-	public Cell goDown() {
-		return moveTo("D");
+	public Cell goDown(boolean noWh) {
+		return moveTo("D", noWh);
 	}
 
-	private Cell moveTo(String direction) {
+	private Cell moveTo(String direction,boolean noWh) {
 		
-		currentCell.setEmpty(false);
+		
+		currentLength=currentLength-1;
 		switch (direction) {
 		case "R":
-			return currentCell.goRight();
+			return checkWh(noWh,currentCell.goRight());
 		case "L":
-			return currentCell.goLeft();
+			return checkWh(noWh,currentCell.goLeft());
 		case "U":
-			return currentCell.goUp();
+			return checkWh(noWh,currentCell.goUp());
 		case "D":
-			return currentCell.goDown();
+			return checkWh(noWh,currentCell.goDown());
 
 		default:
 			break;
 		}
 		return null;
+	}
+
+	private Cell checkWh(boolean noWh, Cell cell) {
+		 cell.setEmpty(false);
+		 return cell;
 	}
 
 	public List<Cell> getPath() {
