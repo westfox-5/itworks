@@ -21,6 +21,34 @@ public class Cell {
 		return Integer.valueOf(value);
 	}
 
+	public Cell goLeft(Matrix matrix){
+		if(c<0)
+			return matrix.getCelle()[matrix.C-1][r];
+		else	
+			return matrix.getCelle()[c-1][r];
+	}
+
+	public Cell goRight(Matrix matrix){
+		if(c>matrix.C)
+			return matrix.getCelle()[0][r];
+		else	
+			return matrix.getCelle()[c+1][r];
+	}
+
+	public Cell goUp(Matrix matrix){
+		if(r<0)
+			return matrix.getCelle()[c][matrix.R-1];
+		else	
+			return matrix.getCelle()[c][r-1];
+	}
+
+	public Cell goDown(Matrix matrix){
+		if(r>matrix.R)
+			return matrix.getCelle()[c][0];
+		else	
+			return matrix.getCelle()[c][r+1];
+	}
+
 
 	public int getR() {
 		return r;
