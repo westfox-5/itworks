@@ -26,31 +26,31 @@ public class Cell {
 	}
 
 	public Cell goLeft(){
-		if(c<0)
-			return matrix.getCelle()[matrix.C-1][r];
+		if(c==0)
+			return matrix.getCelle()[r][matrix.C-1];
 		else	
-			return matrix.getCelle()[c-1][r];
+			return matrix.getCelle()[r][c-1];
 	}
 
-	public Cell goRight(Matrix matrix){
-		if(c>matrix.C)
-			return matrix.getCelle()[0][r];
+	public Cell goRight(){
+		if(c==matrix.C-1)
+			return matrix.getCelle()[r][0];
 		else	
-			return matrix.getCelle()[c+1][r];
+			return matrix.getCelle()[r][c+1];
 	}
 
-	public Cell goUp(Matrix matrix){
-		if(r<0)
-			return matrix.getCelle()[c][matrix.R-1];
+	public Cell goUp(){
+		if(r==0)
+			return matrix.getCelle()[matrix.R-1][c];
 		else	
-			return matrix.getCelle()[c][r-1];
+			return matrix.getCelle()[r-1][c];
 	}
 
-	public Cell goDown(Matrix matrix){
-		if(r>matrix.R)
-			return matrix.getCelle()[c][0];
+	public Cell goDown(){
+		if(r==matrix.R-1)
+			return matrix.getCelle()[0][c];
 		else	
-			return matrix.getCelle()[c][r+1];
+			return matrix.getCelle()[r+1][c];
 	}
 
 
