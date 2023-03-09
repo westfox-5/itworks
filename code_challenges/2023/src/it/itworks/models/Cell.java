@@ -55,11 +55,11 @@ public class Cell {
 	
 	
 	public Cell clone() {
-		Cell c = new Cell(r, c);
-		c.wh = wh;
-		c.empty = empty;
-		c.value = value;
+		Cell cell = new Cell(r, c);
+		cell.wh = wh;
+		cell.empty = empty;
+		cell.value = value;
 		
-		return c;
+		return cell;
 	}
 }
