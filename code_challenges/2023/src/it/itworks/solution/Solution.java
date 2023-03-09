@@ -35,5 +35,5 @@ public abstract class Solution {
 
 	protected abstract Integer[][] calculateStrengthMatrix();
 
-	protected abstract int[][] getMaxCell(Integer[][] strengthMatrix);
+	protected abstract int[] getMaxCell(Integer[][] strengthMatrix);
 }

@@ -26,6 +26,7 @@ public class Solution0 extends Solution {
 
 		for(int snakesPlaced = 0; snakesPlaced <= matrix.getNumberSnakes(); snakesPlaced++) {
 			// Get Current Max Position
+			currentMaxPosition = getMaxCell(strengthMatrix);
 
 			Snake currentSnake = snakesToPlace.remove(0);
 			Cell cella = matrix.getCella(currentMaxPosition[0], currentMaxPosition[1]);
@@ -43,8 +44,8 @@ public class Solution0 extends Solution {
 	}
 
 	@Override
-	protected int[][] getMaxCell(Integer[][] strengthMatrix) {
-		return new int[0][];
+	protected int[] getMaxCell(Integer[][] strengthMatrix) {
+		return new int[0];
 	}
 
 }
