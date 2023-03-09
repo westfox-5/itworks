@@ -80,4 +80,14 @@ public class Cell {
 	public void setValue(Integer value) {
 		this.value = value;
 	}	
+	
+	
+	public Cell clone() {
+		Cell cell = new Cell(r, c);
+		cell.wh = wh;
+		cell.empty = empty;
+		cell.value = value;
+		
+		return cell;
+	}
 }
