@@ -29,7 +29,7 @@ public class Snake {
 	Matrix matrix;
 	
 	public void init() {
-		currentCell=new Cell(ri, ci);
+		currentCell=new Cell(matrix, ri, ci);
 	}
 	
 	public Cell goRight() {
