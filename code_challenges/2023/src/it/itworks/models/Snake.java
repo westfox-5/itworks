@@ -6,8 +6,11 @@ import java.util.List;
 import it.itworks.annotations.Input;
 import it.itworks.annotations.InputClass;
 import it.itworks.annotations.Output;
+import it.itworks.annotations.OutputClass;
+import it.itworks.annotations.OutputCollection;
 
 @InputClass
+@OutputClass
 public class Snake {
 
 	@Input(position = 1, min = 0, max = 1_000)
@@ -18,8 +21,9 @@ public class Snake {
 
 	@Output(position = 2)
 	Integer ri; // row iniziale inserimento snake
-
+	
 	@Output(position = 3)
+	@OutputCollection(Cell.class)
 	List<Cell> path; // lista di celle che occupa lo snake
 
 	Cell currentCell;
@@ -54,13 +58,21 @@ public class Snake {
 		currentLength=currentLength-1;
 		switch (direction) {
 		case "R":
-			return checkWh(noWh,currentCell.goRight());
+			Cell c = checkWh(noWh,currentCell.goRight());
+			if (c != null)c.setDir("R");
+			return c;
 		case "L":
-			return checkWh(noWh,currentCell.goLeft());
+			c = checkWh(noWh,currentCell.goLeft());
+			if (c != null)c.setDir("L");
+			return c;
 		case "U":
-			return checkWh(noWh,currentCell.goUp());
+			c = checkWh(noWh,currentCell.goUp());
+			if (c != null)c.setDir("U");
+			return c;
 		case "D":
-			return checkWh(noWh,currentCell.goDown());
+			c = checkWh(noWh,currentCell.goDown());
+			if (c != null) c.setDir("D");
+			return c;
 
 		default:
 			break;

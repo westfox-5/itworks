@@ -17,7 +17,7 @@ public class Solution0 extends Solution {
 	protected void execute(Matrix matrix) {
 		StrengthMatrix strengthMatrix = calculateStrengthMatrix(matrix);
 
-		List<Snake> snakesToPlace = new ArrayList<>(matrix.getSnakes().stream().map(Snake::clone).toList());
+		List<Snake> snakesToPlace = new ArrayList<>(matrix.getSnakes());
 		// Sort for descending order
 		snakesToPlace.sort(Comparator.comparingInt(Snake::getLength).reversed());
 
@@ -29,13 +29,18 @@ public class Solution0 extends Solution {
 
 			Snake currentSnake = snakesToPlace.remove(0);
 			Cell cella = matrix.getCella(currentMaxPosition[0], currentMaxPosition[1]);
-			List<Cell> occupate = matrix.placeSnake(currentSnake, cella);
+			List<Cell> path = matrix.placeSnake(currentSnake, cella);
+			
+			
 
 			// Update strength matrix
-			strengthMatrix.resetCells(occupate);
+			strengthMatrix.resetCells(path);
+			
+			
+			
 		}
 
-
+		System.out.println("A");
 	}
 
 	@Override

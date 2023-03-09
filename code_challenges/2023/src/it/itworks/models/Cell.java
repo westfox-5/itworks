@@ -1,11 +1,20 @@
 package it.itworks.models;
 
 import it.itworks.annotations.Input;
+import it.itworks.annotations.Output;
+import it.itworks.annotations.OutputClass;
 
+@OutputClass
 public class Cell {
 	
 	private final Matrix matrix;
-	private final int r, c;
+	
+	@Output(position = 1)
+	private String dir;
+	
+	private Integer r;
+	private Integer c;
+	
 	private boolean empty;
 	
 	public Cell(Matrix matrix, int r, int c) {
@@ -34,6 +43,7 @@ public class Cell {
 	}
 
 	public Cell goRight(){
+		setDir("R");
 		if(c==matrix.C-1)
 			return matrix.getCelle()[r][0];
 		else	
@@ -41,6 +51,7 @@ public class Cell {
 	}
 
 	public Cell goUp(){
+		setDir("U");
 		if(r==0)
 			return matrix.getCelle()[matrix.R-1][c];
 		else	
@@ -48,6 +59,7 @@ public class Cell {
 	}
 
 	public Cell goDown(){
+		setDir("D");
 		if(r==matrix.R-1)
 			return matrix.getCelle()[0][c];
 		else	
@@ -85,11 +97,20 @@ public class Cell {
 	}	
 	
 	
+	public String getDir() {
+		return dir;
+	}
+
+	public void setDir(String dir) {
+		this.dir = dir;
+	}
+
 	public Cell clone() {
 		Cell cell = new Cell(matrix, r, c);
 		cell.wh = wh;
 		cell.empty = empty;
 		cell.value = value;
+		cell.dir = dir;
 		
 		return cell;
 	}

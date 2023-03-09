@@ -66,7 +66,7 @@ public abstract class OutputWriter<T> {
                 .collect(Collectors.toList());
 
         fields.addAll(getOutputFields(clz.getSuperclass()));
-        fields.sort(Comparator.comparingInt(f -> f.getAnnotation(Input.class).position()));
+        fields.sort(Comparator.comparingInt(f -> f.getAnnotation(Output.class).position()));
         return fields;
     }
 }
