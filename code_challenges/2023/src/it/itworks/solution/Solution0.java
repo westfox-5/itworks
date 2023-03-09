@@ -13,4 +13,9 @@ public class Solution0 extends Solution {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	protected Integer[][] calculateStrengthMatrix() {
+		return new Integer[0][];
+	}
+
 }
