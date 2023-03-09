@@ -62,7 +62,7 @@ public class Solution0 extends Solution {
 	private int calculateValue(Matrix matrix, int x, int y, int snakeLength) {
 		int sum = 0;
 		for(int i = x - snakeLength; i <= x + snakeLength; i++) {
-			for(int q = x - snakeLength; q <= x + snakeLength; q++) {
+			for(int q = y - snakeLength; q <= y + snakeLength; q++) {
 				Integer cellValue = matrix.getCella(i, q).getValue();
 				if(cellValue != null) {
 					sum += cellValue;
