@@ -15,7 +15,7 @@ public class StrengthMatrix {
 
     public int[] getMaxCell() {
         int[] currentMaxPosition = new int[]{0, 0};
-        int max = -1;
+        int max = Integer.MIN_VALUE;
 
         for(int x = 0; x < strengthMatrix.length; x++) {
             for(int y = 0; y < strengthMatrix[0].length; y++) {
@@ -28,6 +28,10 @@ public class StrengthMatrix {
         }
 
         return currentMaxPosition;
+    }
+
+    public int getValue(int x, int y) {
+        return this.strengthMatrix[x][y];
     }
 
     public void resetCells(List<Cell> toReset) {
