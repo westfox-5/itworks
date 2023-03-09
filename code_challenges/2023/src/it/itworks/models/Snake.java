@@ -60,7 +60,6 @@ public class Snake {
 			return currentCell.goUp();
 		case "D":
 			return currentCell.goDown();
-			break;
 
 		default:
 			break;
@@ -119,7 +118,8 @@ public class Snake {
 		for (Cell c: path) {
 			s.path.add(c.clone());
 		}
-		return s;
+		return s;	
+	}
 	
 	public Matrix getMatrix() {
 		return matrix;
