@@ -43,7 +43,7 @@ public class MatrixReader extends InputReader<Matrix> {
                 	
                 	for (int r = 0; r < matrix.getR(); ++r) {
                 		for (int c = 0; c < matrix.getC(); ++c) {
-                			Cell cell = parseCell(r, c, reader);
+                			Cell cell = parseCell(matrix, r, c, reader);
                 			celle[r][c] = cell;
                 		}
                 	}
@@ -74,8 +74,8 @@ public class MatrixReader extends InputReader<Matrix> {
         return s;
     };
     
-    private Cell parseCell(int r, int c, final CustomReader reader) throws Exception {
-    	Cell cell = new Cell(r, c);
+    private Cell parseCell(Matrix matrix, int r, int c, final CustomReader reader) throws Exception {
+    	Cell cell = new Cell(matrix, r, c);
 
         List<Field> inputFields = getInputFields(Cell.class);
         for (Field inField : inputFields) {

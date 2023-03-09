@@ -4,10 +4,12 @@ import it.itworks.annotations.Input;
 
 public class Cell {
 	
+	private final Matrix matrix;
 	private final int r, c;
 	private boolean empty;
 	
-	public Cell(int r, int c) {
+	public Cell(Matrix matrix, int r, int c) {
+		this.matrix = matrix;
 		this.r = r;
 		this.c = c;
 	}
@@ -23,7 +25,7 @@ public class Cell {
 		return value;
 	}
 
-	public Cell goLeft(Matrix matrix){
+	public Cell goLeft(){
 		if(c<0)
 			return matrix.getCelle()[matrix.C-1][r];
 		else	
@@ -83,7 +85,7 @@ public class Cell {
 	
 	
 	public Cell clone() {
-		Cell cell = new Cell(r, c);
+		Cell cell = new Cell(matrix, r, c);
 		cell.wh = wh;
 		cell.empty = empty;
 		cell.value = value;
