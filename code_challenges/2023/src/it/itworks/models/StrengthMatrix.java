@@ -1,5 +1,7 @@
 package it.itworks.models;
 
+import java.util.List;
+
 public class StrengthMatrix {
     Integer[][] strengthMatrix;
 
@@ -17,7 +19,7 @@ public class StrengthMatrix {
 
         for(int x = 0; x < strengthMatrix.length; x++) {
             for(int y = 0; y < strengthMatrix[0].length; y++) {
-                if(strengthMatrix[x][y] >= max) {
+                if(strengthMatrix[x][y] != null && strengthMatrix[x][y] >= max) {
                     currentMaxPosition[0] = x;
                     currentMaxPosition[1] = y;
                     max = strengthMatrix[x][y];
@@ -26,5 +28,11 @@ public class StrengthMatrix {
         }
 
         return currentMaxPosition;
+    }
+
+    public void resetCells(List<Cell> toReset) {
+        for(Cell c : toReset) {
+            strengthMatrix[c.getR()][c.getC()] = null;
+        }
     }
 }
