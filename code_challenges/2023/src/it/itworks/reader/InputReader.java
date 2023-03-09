@@ -82,7 +82,7 @@ public abstract class InputReader<T> {
                 maxOk = (Double) value < max;
             }
 
-            if (!maxOk) {
+            if (!maxOk && !(value instanceof String)) {
                 throw new RuntimeException(loc +
                         ": VALIDATION ERROR" +
                         ": field: " + field.getName() +
@@ -101,7 +101,7 @@ public abstract class InputReader<T> {
                 minOk = (Double) value >= min;
             }
 
-            if (!minOk) {
+            if (!minOk && !(value instanceof String)) {
                 throw new RuntimeException(loc +
                         ": VALIDATION ERROR" +
                         ": field: " + field.getName() +

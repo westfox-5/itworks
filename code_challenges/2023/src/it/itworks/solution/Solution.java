@@ -27,11 +27,11 @@ public abstract class Solution {
     protected abstract void execute(Matrix matrix);
     
     protected Matrix read() throws Exception {
-    	return new MatrixReader().parseFile("code_challenges/2023/input/"+file);
+    	return new MatrixReader().parseFile("input/"+file);
     }
 
     protected void write(Matrix matrix) throws Exception {
-    	new MatrixWriter().writeToFile(matrix, "code_challenges/2023/output/"+file);
+    	new MatrixWriter().writeToFile(matrix, "output/"+file);
     }
 
 	protected abstract StrengthMatrix calculateStrengthMatrix(Matrix matrix);

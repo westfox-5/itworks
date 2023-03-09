@@ -140,7 +140,12 @@ public class CustomReader {
         }
 
         if (clazz == Integer.class) {
-            return (Token<T>) Token.ofInteger(loc, Integer.parseInt(nextValue));
+            Integer value = null;
+            try {
+                return (Token<T>) Token.ofInteger(loc, Integer.parseInt(nextValue));
+            } catch (Exception e) {
+                return (Token<T>) Token.ofString(loc, nextValue);
+            }
         }
 
         if (clazz == String.class) {
