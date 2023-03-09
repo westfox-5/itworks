@@ -37,14 +37,22 @@ public abstract class InputReader<T> {
         }
         return obj;
     }
-
-    protected <V> void parseBasicField(V obj, Field field, final CustomReader reader) throws IOException, IllegalAccessException {
+    
+    protected <V> Object getBasicField(V obj, Field field, final CustomReader reader) throws IOException, IllegalAccessException {
         Class<?> inType = field.getType();
         Token<?> token = reader.getNextToken(inType);
 
         if (validate(field, token)) {
-            set(obj, field, token.getValue());
+        	return token.getValue();
         }
+        return null;
+    }
+
+    protected <V> void parseBasicField(V obj, Field field, final CustomReader reader) throws IOException, IllegalAccessException {
+    	Object o = getBasicField(obj, field, reader);
+    	if (o != null) {
+    		set(obj, field, o);
+    	}
     }
 
     protected <V> void set(V obj, Field field, Object value) throws IllegalAccessException {

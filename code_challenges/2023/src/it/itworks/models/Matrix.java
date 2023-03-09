@@ -11,13 +11,13 @@ import it.itworks.annotations.OutputCollection;
 @InputClass
 public class Matrix {
 	
-	@Input(position = 1)
+	@Input(position = 1, max = 5_001)
 	Integer C;
 	
-	@Input(position = 2)
+	@Input(position = 2, max = 5_001)
 	Integer R;
 	
-	@Input(position =  3)
+	@Input(position =  3, max = 5_001)
 	Integer S;
 	
 	@Input(position = 4)

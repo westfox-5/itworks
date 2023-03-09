@@ -12,13 +12,15 @@ public class Cell {
 		this.c = c;
 	}
 
-	@Input(position =  1)
-	private String value;
-	
+	private boolean wh;
+
+	@Input(position =  1, min = -10_001, max = 10_000)
+	private Integer value;
+
 	
 	public Integer getValue() {
-		if (value.equals("*")) return null;
-		return Integer.valueOf(value);
+		if (wh) return null;
+		return value;
 	}
 
 
@@ -34,11 +36,20 @@ public class Cell {
 		return empty;
 	}
 
+	public boolean isWormhole() {
+		return wh;
+	}
+
+	public void setWh(boolean wh) {
+		this.wh = wh;
+	}
+
+
 	public void setEmpty(boolean empty) {
 		this.empty = empty;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Integer value) {
 		this.value = value;
 	}	
 }

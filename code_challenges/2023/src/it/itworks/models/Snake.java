@@ -7,7 +7,7 @@ import it.itworks.annotations.Output;
 @InputClass
 public class Snake {
 
-	@Input(position = 1)
+	@Input(position = 1, min = 0, max = 1_000)
 	Integer length;
 	
 	@Output(position =  1)
@@ -72,5 +72,11 @@ public class Snake {
 	public void setRw(Integer rw) {
 		this.rw = rw;
 	}
-
+	
+	public Snake clone() {
+		Snake s = new Snake();
+		s.length = length;
+		
+		return s;
+	}
 }
