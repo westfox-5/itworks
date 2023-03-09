@@ -32,4 +32,6 @@ public abstract class Solution {
     protected void write(Matrix matrix) throws Exception {
     	new MatrixWriter().writeToFile(matrix, "code_challenges/2023/output/"+file);
     }
+
+	protected abstract Integer[][] calculateStrengthMatrix();
 }
