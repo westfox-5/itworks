@@ -57,7 +57,7 @@ public class Snake {
 		case "L":
 			return currentCell.goLeft();
 		case "U":
-			return currentCell.goUpper();
+			return currentCell.goUp();
 		case "D":
 			return currentCell.goDown();
 			break;
