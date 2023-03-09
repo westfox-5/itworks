@@ -112,11 +112,13 @@ public class Snake {
 		s.length = length;
 		s.ci = ci;
 		s.ri = ri;
-		s.currentCell = currentCell.clone();
+		s.currentCell = currentCell != null ? currentCell.clone() : null;
 		
 		s.path = new ArrayList<Cell>();
-		for (Cell c: path) {
-			s.path.add(c.clone());
+		if(path != null) {
+			for (Cell c: path) {
+				s.path.add(c.clone());
+			}
 		}
 		return s;	
 	}
