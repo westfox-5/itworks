@@ -79,7 +79,12 @@ public class MatrixReader extends InputReader<Matrix> {
 
         List<Field> inputFields = getInputFields(Cell.class);
         for (Field inField : inputFields) {
-        	parseBasicField(c, inField, reader);
+        	Object val = getBasicField(c, inField, reader);
+        	if (val != null && val.equals("*")) {
+        		cell.setWh(true);
+        	} else if (val != null && val instanceof Integer) {
+        		cell.setValue((Integer)val);
+        	}
         }
         
         return cell;
