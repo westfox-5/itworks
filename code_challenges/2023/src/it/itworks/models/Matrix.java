@@ -1,5 +1,6 @@
 package it.itworks.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.itworks.annotations.Input;
@@ -88,8 +89,8 @@ public class Matrix {
 		return snakes.size();
 	}
 
-	public void placeSnake(Snake snake, Cell cell) {
-
+	public List<Cell> placeSnake(Snake snake, Cell cell) {
+		return new ArrayList<>();
 	}
 
 	public Cell getCella(int x, int y) {

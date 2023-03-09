@@ -12,33 +12,45 @@ public class Snake {
 
 	@Input(position = 1, min = 0, max = 1_000)
 	Integer length;
-	
-	@Output(position =  1)
+
+	@Output(position = 1)
 	Integer ci; // col iniziale inserimento snake
-	
-	@Output(position =  2)
+
+	@Output(position = 2)
 	Integer ri; // row iniziale inserimento snake
-	 
-	@Output(position=3)
-	List<Cell> path; //lista di celle che occupa lo snake
+
+	@Output(position = 3)
+	List<Cell> path; // lista di celle che occupa lo snake
 
 	Cell currentCell;
+
+	Integer currentLength;
 	
-	public Cell goRight(){
+	Matrix matrix;
+	
+	public void init() {
+		currentCell=new Cell(ri, ci);
+	}
+	
+	public Cell goRight() {
 		return moveTo("R");
 	}
 
-	public Cell goLeft(){
+	public Cell goLeft() {
 		return moveTo("L");
 	}
-	public Cell goUp(){
+
+	public Cell goUp() {
 		return moveTo("U");
 	}
-	public Cell goDown(){
+
+	public Cell goDown() {
 		return moveTo("D");
 	}
-	
+
 	private Cell moveTo(String direction) {
+		
+		currentCell.setEmpty(false);
 		switch (direction) {
 		case "R":
 			return currentCell.goRight();
@@ -48,14 +60,14 @@ public class Snake {
 			return currentCell.goUpper();
 		case "D":
 			return currentCell.goDown();
-		break;
+			break;
 
 		default:
 			break;
 		}
 		return null;
 	}
-	
+
 	public List<Cell> getPath() {
 		return path;
 	}
@@ -79,7 +91,6 @@ public class Snake {
 	public void setLength(Integer length) {
 		this.length = length;
 	}
-	
 
 	public Integer getCi() {
 		return ci;
@@ -109,6 +120,13 @@ public class Snake {
 			s.path.add(c.clone());
 		}
 		return s;
+	
+	public Matrix getMatrix() {
+		return matrix;
+	}
+
+	public void setMatrix(Matrix matrix) {
+		this.matrix = matrix;
 	}
 
 }
