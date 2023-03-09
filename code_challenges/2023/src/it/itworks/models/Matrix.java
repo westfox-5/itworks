@@ -1,6 +1,7 @@
 package it.itworks.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import it.itworks.annotations.Input;
@@ -101,6 +102,9 @@ public class Matrix {
 	}
 
 	private Integer calcolaBestPath2(Snake snake, Cell cell, boolean noWh, List<Cell> path) {
+		if (cell==null) {
+			return null;
+		}
 		if (noWh && cell.isWormhole()) {
 			return null;
 		} else {
@@ -126,7 +130,7 @@ public class Matrix {
 	}
 
 	private Integer max(Integer a, Integer b, Integer c, Integer d) {
-		return a + b + c + d;
+		return Arrays.asList(a,b,c,d).stream().mapToInt(p->p==null?0:p).max().getAsInt();
 	}
 
 //	private void calcolaBestPath(Integer length, Cell cell, Integer value) {
