@@ -3,6 +3,7 @@ package it.itworks.solution;
 import it.itworks.models.Cell;
 import it.itworks.models.Matrix;
 import it.itworks.models.Snake;
+import it.itworks.models.StrengthMatrix;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,7 +17,7 @@ public class Solution0 extends Solution {
 
     @Override
 	protected void execute(Matrix matrix) {
-		Integer[][] strengthMatrix = calculateStrengthMatrix();
+		StrengthMatrix strengthMatrix = calculateStrengthMatrix();
 
 		int[] currentMaxPosition = new int[]{ 0, 0};
 
@@ -26,7 +27,7 @@ public class Solution0 extends Solution {
 
 		for(int snakesPlaced = 0; snakesPlaced <= matrix.getNumberSnakes(); snakesPlaced++) {
 			// Get Current Max Position
-			currentMaxPosition = getMaxCell(strengthMatrix);
+			currentMaxPosition = strengthMatrix.getMaxCell();
 
 			Snake currentSnake = snakesToPlace.remove(0);
 			Cell cella = matrix.getCella(currentMaxPosition[0], currentMaxPosition[1]);
@@ -39,13 +40,8 @@ public class Solution0 extends Solution {
 	}
 
 	@Override
-	protected Integer[][] calculateStrengthMatrix() {
-		return new Integer[0][];
-	}
-
-	@Override
-	protected int[] getMaxCell(Integer[][] strengthMatrix) {
-		return new int[0];
+	protected StrengthMatrix calculateStrengthMatrix() {
+		return null;
 	}
 
 }

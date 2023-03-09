@@ -1,6 +1,7 @@
 package it.itworks.solution;
 
 import it.itworks.models.Matrix;
+import it.itworks.models.StrengthMatrix;
 import it.itworks.reader.MatrixReader;
 import it.itworks.writer.MatrixWriter;
 
@@ -33,7 +34,5 @@ public abstract class Solution {
     	new MatrixWriter().writeToFile(matrix, "code_challenges/2023/output/"+file);
     }
 
-	protected abstract Integer[][] calculateStrengthMatrix();
-
-	protected abstract int[] getMaxCell(Integer[][] strengthMatrix);
+	protected abstract StrengthMatrix calculateStrengthMatrix();
 }
