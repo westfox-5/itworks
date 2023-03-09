@@ -18,17 +18,17 @@ public class Solution0 extends Solution {
 
     @Override
 	protected void execute(Matrix matrix) {
-		StrengthMatrix strengthMatrix = calculateStrengthMatrix();
-
-		int[] currentMaxPosition;
+		StrengthMatrix strengthMatrix = calculateStrengthMatrix(matrix);
 
 		List<Snake> snakesToPlace = new ArrayList<>(matrix.getSnakes().stream().map(Snake::clone).toList());
 		// Sort for descending order
 		snakesToPlace.sort(Comparator.comparingInt(Snake::getLength).reversed());
 
-		for(int snakesPlaced = 0; snakesPlaced <= matrix.getNumberSnakes(); snakesPlaced++) {
+		int numSnakes = matrix.getNumberSnakes();
+
+		for(int snakesPlaced = 0; snakesPlaced <= numSnakes; snakesPlaced++) {
 			// Get Current Max Position
-			currentMaxPosition = strengthMatrix.getMaxCell();
+			int[] currentMaxPosition = strengthMatrix.getMaxCell();
 
 			Snake currentSnake = snakesToPlace.remove(0);
 			Cell cella = matrix.getCella(currentMaxPosition[0], currentMaxPosition[1]);
@@ -38,12 +38,38 @@ public class Solution0 extends Solution {
 			strengthMatrix.resetCells(occupate);
 		}
 
-		
+
 	}
 
 	@Override
-	protected StrengthMatrix calculateStrengthMatrix() {
-		return null;
+	protected StrengthMatrix calculateStrengthMatrix(Matrix matrix) {
+		// calculate medium length of snakes
+		int snakeLength = matrix.getSnakes().stream().map(Snake::getLength).reduce(0, Integer::sum) / matrix.getNumberSnakes();
+
+		StrengthMatrix strengthMatrix = new StrengthMatrix(matrix.getR(), matrix.getC());
+
+		for(int x = 0; x < matrix.getR(); x++) {
+			for(int y = 0; y < matrix.getC(); y++) {
+				int strength = calculateValue(matrix, x, y, snakeLength);
+				strengthMatrix.set(x, y, strength);
+			}
+		}
+
+		return strengthMatrix;
+	}
+
+
+	private int calculateValue(Matrix matrix, int x, int y, int snakeLength) {
+		int sum = 0;
+		for(int i = x - snakeLength; i <= x + snakeLength; i++) {
+			for(int q = x - snakeLength; q <= x + snakeLength; q++) {
+				Integer cellValue = matrix.getCella(i, q).getValue();
+				if(cellValue != null) {
+					sum += cellValue;
+				}
+			}
+		}
+		return sum;
 	}
 
 }

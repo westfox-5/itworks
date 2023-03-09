@@ -94,7 +94,10 @@ public class Matrix {
 	}
 
 	public Cell getCella(int x, int y) {
-		return this.celle[x][y];
+		int safeX = (x + getR()) % getR();
+		int safeY = (y + getC()) % getC();
+
+		return this.celle[safeX][safeY];
 	}
 
 }

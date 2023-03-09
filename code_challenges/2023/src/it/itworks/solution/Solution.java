@@ -34,5 +34,5 @@ public abstract class Solution {
     	new MatrixWriter().writeToFile(matrix, "code_challenges/2023/output/"+file);
     }
 
-	protected abstract StrengthMatrix calculateStrengthMatrix();
+	protected abstract StrengthMatrix calculateStrengthMatrix(Matrix matrix);
 }
