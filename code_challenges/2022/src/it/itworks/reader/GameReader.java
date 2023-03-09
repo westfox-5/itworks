@@ -45,6 +45,11 @@ public class GameReader extends InputReader<Game> {
                 parseBasicField(game, inField, reader);
             }
         }
+        
+        
+        // CREAZIONE R*C
+        matrix.create();
+        
 
         reader.close();
 
