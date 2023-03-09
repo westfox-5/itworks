@@ -12,6 +12,7 @@ public class Cell {
 		this.matrix = matrix;
 		this.r = r;
 		this.c = c;
+		this.empty = true;
 	}
 
 	private boolean wh;

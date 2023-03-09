@@ -88,10 +88,13 @@ public class Matrix {
 
 	public List<Cell> placeSnake(Snake snake, Cell cell) {
 		snake.setCurrentCell(cell);
-
+		snake.ci = cell.getC();
+		snake.ri = cell.getR();
+		
 		ArrayList<Cell> path = new ArrayList<Cell>();
 		calcolaBestPath2(snake, cell, true, path);
-
+		
+		snake.setPath(path);
 		return path;
 	}
 
@@ -118,14 +121,56 @@ public class Matrix {
 			return cell.getValue();
 		} else {
 			path.add(cell.clone());
-
-			return cell.getValue() + max(calcolaBestPath2(snake, snake.goDown(noWh), noWh, path),
-					calcolaBestPath2(snake, snake.goUp(noWh), noWh, path),
-					calcolaBestPath2(snake, snake.goRight(noWh), noWh, path),
-					calcolaBestPath2(snake, snake.goLeft(noWh), noWh, path));
+			
+			List<Cell> pathD = new ArrayList<>(path);
+			Snake snakeD = snake.clone();
+			Integer scoreD = calcolaBestPath2(snakeD, snakeD.goDown(noWh), noWh, pathD);
+			
+			List<Cell> pathU = new ArrayList<>(path);
+			Snake snakeU = snake.clone();
+			Integer scoreU = calcolaBestPath2(snakeU, snakeU.goUp(noWh), noWh, pathU);
+			
+			
+			List<Cell> pathL = new ArrayList<>(path);
+			Snake snakeL = snake.clone();
+			Integer scoreL = calcolaBestPath2(snakeL, snakeL.goLeft(noWh), noWh, pathL);
+			
+			
+			List<Cell> pathR = new ArrayList<>(path);
+			Snake snakeR = snake.clone();
+			Integer scoreR = calcolaBestPath2(snakeR, snakeR.goRight(noWh), noWh, pathR);
+			
+			
+			
+			
+			Integer maxScore = scoreD != null ? scoreD: Integer.MIN_VALUE;
+			List<Cell> maxPath = pathD;
+			Snake maxSnake = snakeD;
+			
+			if (scoreU != null && maxScore.compareTo(scoreU) <= 0) {
+				maxScore = scoreU;
+				maxPath = pathU;
+				maxSnake = snakeU;
+			}
+			
+			if (scoreL != null && maxScore.compareTo(scoreL) <= 0) {
+				maxScore = scoreL;
+				maxPath = pathL;
+				maxSnake = snakeL;
+			}
+			
+			if (scoreR != null && maxScore.compareTo(scoreR) <= 0) {
+				maxScore = scoreR;
+				maxPath = pathR;
+				maxSnake = snakeR;
+			}
+			
+			path.clear();
+			path.addAll(maxPath);
+			return cell.getValue() + maxScore;
 		}
 	}
-
+	
 	private Cell followWh(Cell cell) {
 		// TODO Auto-generated method stub
 		return null;

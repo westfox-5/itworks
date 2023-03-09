@@ -69,9 +69,9 @@ public class Snake {
 	}
 
 	private Cell checkWh(boolean noWh, Cell cell) {
-		 cell.setEmpty(false);
-		 if (!cell.isEmpty())
+		if (!cell.isEmpty())
 			 return null;
+		cell.setEmpty(false);
 		 return cell;
 	}
 
