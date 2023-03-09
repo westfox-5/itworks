@@ -81,8 +81,15 @@ public class Matrix {
 	public void setOutputSnakes(List<Snake> outputSnakes) {
 		this.outputSnakes = outputSnakes;
 	}
-	
-	
-	
-	
+
+
+
+	public Integer getNumberSnakes() {
+		return snakes.size();
+	}
+
+	public void placeSnake(Snake snake, Cell cell) {
+		
+	}
+
 }
