@@ -7,6 +7,10 @@ public class StrengthMatrix {
         strengthMatrix = new Integer[r][c];
     }
 
+    public void set(int r, int c, int val) {
+        this.strengthMatrix[r][c] = val;
+    }
+
     public int[] getMaxCell() {
         int[] currentMaxPosition = new int[]{0, 0};
         int max = -1;
