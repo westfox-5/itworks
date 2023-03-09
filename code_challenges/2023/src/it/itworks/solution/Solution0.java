@@ -23,7 +23,7 @@ public class Solution0 extends Solution {
 
 		int numSnakes = matrix.getNumberSnakes();
 
-		for(int snakesPlaced = 0; snakesPlaced <= numSnakes; snakesPlaced++) {
+		for(int snakesPlaced = 0; snakesPlaced < numSnakes; snakesPlaced++) {
 			// Get Current Max Position
 			int[] currentMaxPosition = strengthMatrix.getMaxCell();
 

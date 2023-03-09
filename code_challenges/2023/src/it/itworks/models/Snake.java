@@ -24,7 +24,7 @@ public class Snake {
 
 	Cell currentCell;
 
-	Integer currentLength;
+	public Integer currentLength;
 	
 	Matrix matrix;
 	
@@ -121,6 +121,7 @@ public class Snake {
 		s.ci = ci;
 		s.ri = ri;
 		s.currentCell = currentCell != null ? currentCell.clone() : null;
+		s.currentLength = currentLength;
 		
 		s.path = new ArrayList<Cell>();
 		if(path != null) {

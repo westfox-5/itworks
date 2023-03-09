@@ -71,6 +71,8 @@ public class MatrixReader extends InputReader<Matrix> {
         for (Field inField : inputFields) {
         	parseBasicField(s, inField, reader);
         }
+        
+        s.currentLength = s.getLength();
         return s;
     };
     

@@ -90,7 +90,7 @@ public class Matrix {
 		snake.setCurrentCell(cell);
 
 		ArrayList<Cell> path = new ArrayList<Cell>();
-		calcolaBestPath2(snake, cell, false, path);
+		calcolaBestPath2(snake, cell, true, path);
 
 		return path;
 	}
@@ -107,10 +107,12 @@ public class Matrix {
 		}
 		if (noWh && cell.isWormhole()) {
 			return null;
-		} else {
+		} else if (!noWh && cell.isWormhole()){
 			// todo
 			cell = followWh(cell);
 		}
+		
+		
 		if (snake.currentLength == 1) {
 			path.add(cell.clone());
 			return cell.getValue();
